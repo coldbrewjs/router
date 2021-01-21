@@ -1,0 +1,82 @@
+{
+  "name": "@coldbrew/router",
+  "description": "API Router for Readable Code",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.es.js",
+  "sideEffect": false,
+  "engines": {
+    "node": ">=10",
+    "npm": ">=5",
+    "yarn": ">=1.4.0"
+  },
+  "scripts": {
+    "prebuild": "tsc --emitDeclarationOnly",
+    "build": "rollup -c",
+    "test": "jest",
+    "test:w": "jest --watch",
+    "test:c": "jest --coverage"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coldbrewjs/router.git"
+  },
+  "keywords": [
+    "xhr",
+    "http",
+    "ajax",
+    "promise",
+    "node"
+  ],
+  "author": {
+    "name": "Kevin You",
+    "email": "eilgwon88@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coldbrewjs/Router/issues",
+    "email": "eilgwon88@gmail.com"
+  },
+  "homepage": "https://github.com/coldbrewjs/Router.git",
+  "files": [
+    "dist/**/*"
+  ],
+  "lint-staged": {
+    "*.ts": [
+      "eslint . --fix",
+      "prettier --write"
+    ]
+  },
+  "peerDependencies": {
+    "axios": "^0.21.1"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.7",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@types/jest": "^26.0.20",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^4.3.8",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1",
+    "rollup": "^2.37.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.3"
+  }
+}

@@ -1,0 +1,10 @@
+tests/
+rollup.config.js
+jest.config.js
+.huskryrc.js
+.prettier.js
+.prettierignore
+.eslintrc.js
+.eslintignore
+.babelrc.json
+.vscode/
