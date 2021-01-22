@@ -17,17 +17,12 @@ cache:
 install:
   - yarn install
 
-script:
-  - |
-    if [ "$TRAVIS_BRANCH" == "master" ]; then
-      CI=false yarn build;
-      yarn publish
-    fi
-
 deploy:
   provider: npm
   email: eilgwon@hanmail.net
   api_key: $NPM_TOKEN
+  on:
+    branches: master
 
 branches:
   only:
