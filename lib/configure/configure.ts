@@ -31,7 +31,7 @@ export class Configure {
         return this;
     }
 
-    public getBaseUri(): string | undefined {
+    public getBaseUri(): string {
         return UriStore.getInstance.getData();
     }
 }

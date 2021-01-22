@@ -197,11 +197,15 @@ try {
 Performing multiple concurrent requests
 
 ```typescript
-import { Router } from '@coldbrewjs/router';
+import { Router, Configure } from '@coldbrewjs/router';
 
-const products = 'http://api.service.com/products';
-const categories = 'http://api.service.com/categories';
-const sellers = 'http://api.service.com/sellers';
+const baseUri = 'http://api.service.com';
+
+Configure.getInstance.baseUri(baseUri);
+
+const products = '/products';
+const categories = '/categories';
+const sellers = '/sellers';
 
 const firstRouter = new Router().uri(products).get();
 const secondRouter = new Router().uri(categories).get();

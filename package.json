@@ -1,7 +1,7 @@
 {
   "name": "@coldbrewjs/router",
   "description": "API Router for Readable Code",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.es.js",
@@ -11,16 +11,16 @@
     "npm": ">=5",
     "yarn": ">=1.4.0"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prebuild": "tsc --emitDeclarationOnly",
     "build": "rollup -c",
     "test": "jest",
     "test:w": "jest --watch",
     "test:c": "jest --coverage",
-    "publish": "publish --access public"
-  },
-  "publishConfig": {
-    "access": "public"
+    "publish": "publish"
   },
   "repository": {
     "type": "git",

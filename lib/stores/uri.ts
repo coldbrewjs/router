@@ -2,7 +2,7 @@ import Store from './base';
 
 export class UriStore extends Store {
     private static instance: UriStore;
-    private baseUrl?: string = undefined;
+    private baseUrl = '';
 
     private constructor() {
         super();
@@ -25,7 +25,7 @@ export class UriStore extends Store {
         return this;
     }
 
-    public getData(): string | undefined {
+    public getData(): string {
         return this.baseUrl;
     }
 }
