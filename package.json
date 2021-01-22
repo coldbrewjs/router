@@ -1,7 +1,7 @@
 {
   "name": "@coldbrewjs/router",
   "description": "API Router for Readable Code",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.es.js",
@@ -26,6 +26,8 @@
     "url": "https://github.com/coldbrewjs/router.git"
   },
   "keywords": [
+    "api",
+    "router",
     "xhr",
     "http",
     "ajax",
@@ -34,12 +36,12 @@
   ],
   "author": {
     "name": "Kevin You",
-    "email": "eilgwon88@gmail.com"
+    "email": "eilgwon@hanmail.net"
   },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/coldbrewjs/router/issues",
-    "email": "eilgwon88@gmail.com"
+    "email": "eilgwon@hanmail.net"
   },
   "homepage": "https://github.com/coldbrewjs/router.git",
   "files": [
