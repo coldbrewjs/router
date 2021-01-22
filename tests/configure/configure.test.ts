@@ -1,4 +1,4 @@
-import { Configure } from '../../src/configure';
+import { Configure } from '../../lib/configure';
 
 describe('Configure', () => {
     const baseUri = 'https://api.coingecko.com/api/v3/coins';

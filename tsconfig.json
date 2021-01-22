@@ -17,7 +17,7 @@
       "removeComments": true,
       "declaration": true,
       "declarationDir": "dist",
-      "rootDirs": ["src"],
+      "rootDirs": ["lib"],
       "outDir": "dist"
     },
     "include": ["src/**/*"],
