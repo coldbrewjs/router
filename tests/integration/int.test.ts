@@ -4,7 +4,7 @@ import {
     RouterInstance,
     RouterError,
     RouterResponse,
-} from '../../src';
+} from '../../lib';
 
 describe('integration', () => {
     describe('get', () => {
