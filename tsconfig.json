@@ -20,7 +20,7 @@
       "rootDirs": ["lib"],
       "outDir": "dist"
     },
-    "include": ["src/**/*"],
+    "include": ["lib/**/*"],
     "exclude": ["node_modules", "tests/**/*"]
   }
   

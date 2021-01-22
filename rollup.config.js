@@ -20,14 +20,14 @@ const getPlugins = () => [
     babel({
         babelrc: true,
         extensions,
-        include: ['src/**/*'],
+        include: ['lib/**/*'],
         babelHelpers: 'bundled',
     }),
     terser(),
 ];
 
 export default {
-    input: 'src/index.ts',
+    input: 'lib/index.ts',
     output: [
         {
             file: pkg.main,
