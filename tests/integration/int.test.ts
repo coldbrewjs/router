@@ -66,9 +66,9 @@ describe('integration', () => {
         const baseUri = 'https://dev.themovill.com';
         const suffix = '/rest/login/manager';
         const payload = {
-            phone: '0207007',
-            password: 'ahqlffj.11Q',
-            loginType: 'WINDOW',
+            phone: '',
+            password: '',
+            loginType: '',
         };
         let router: RouterInstance;
 
