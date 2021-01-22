@@ -60,9 +60,9 @@ describe('Router', () => {
             router
                 .overrideUrl(baseUri)
                 .payload({
-                    phone: '0207007',
-                    password: 'ahqlffj.11Q',
-                    loginType: 'WINDOW',
+                    phone: '',
+                    password: '',
+                    loginType: '',
                 })
                 .post((err: any, response: any) => {
                     if (err) {
@@ -77,9 +77,9 @@ describe('Router', () => {
             router
                 .overrideUrl(baseUri)
                 .payload({
-                    phone: '0207007',
-                    password: 'ahqlffj.11Q',
-                    loginType: 'WINDOW',
+                    phone: '',
+                    password: '',
+                    loginType: '',
                 })
                 .post()
                 .then((response: any) => {
@@ -96,9 +96,9 @@ describe('Router', () => {
                 const response = await router
                     .overrideUrl(baseUri)
                     .payload({
-                        phone: '0207007',
-                        password: 'ahqlffj.11Q',
-                        loginType: 'WINDOW',
+                        phone: '',
+                        password: '',
+                        loginType: '',
                     })
                     .post();
 
