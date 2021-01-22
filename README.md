@@ -38,11 +38,11 @@ $ yarn add @coldbrewjs/router
 
 ## Example
 
-Setting up a Routing environment using Configure
+Setting up a routing environment using `Configure`
 
-- Use Configure to set a global environment for api routing
-- All instance of Router inherit routing environment from Configure
-- Recommend you use Configure at the top of file directory such as app.tsx, index.ts
+- Use `Configure` to set a global environment for api routing
+- All instance of Router inherit routing environment from `Configure`
+- Recommend you use `Configure` at the top of file directory such as app.tsx, index.ts
 
 ```typescript
 import { Configure } from '@coldbrewjs/router';
@@ -192,7 +192,7 @@ try {
 }
 ```
 
-> **NOTE:** You must use overrideHeader method at every single router instance if you custom http header without Configure.
+> **NOTE:** You must use `overrideHeader` at every single router instance if you custom http header without `Configure`.
 
 Performing multiple concurrent requests
 
