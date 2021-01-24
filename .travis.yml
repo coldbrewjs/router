@@ -17,6 +17,9 @@ cache:
 install:
   - yarn install
 
+before_deploy:
+  - yarn build
+
 deploy:
   provider: npm
   email: eilgwon@hanmail.net
