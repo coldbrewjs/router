@@ -34,6 +34,11 @@ export default {
             format: 'cjs',
             sourcemap: false,
         },
+        {
+            file: pkg.module,
+            format: 'es',
+            sourcemap: false,
+        },
     ],
     plugins: getPlugins(),
 };
