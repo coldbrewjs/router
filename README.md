@@ -228,6 +228,8 @@ Performing a `Form data` request
 
 ```typescript
 import { Configure, Router, RouterResponse, RouterError } from '@coldbrewjs/router';
+import * as fs from 'fs';
+import path from 'path';
 import FormData from 'form-data';
 
 Configure.getInstance.baseURL('https://dev.api.com/upload');
