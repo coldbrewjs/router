@@ -1,4 +1,11 @@
-import axios, { AxiosError, AxiosPromise, AxiosResponse, Method } from 'axios';
+import axios, {
+    AxiosError,
+    AxiosPromise,
+    AxiosRequestConfig,
+    AxiosResponse,
+    Method,
+} from 'axios';
+import FormData from 'form-data';
 import { Configure } from '../configure';
 
 type Callback = (
@@ -14,7 +21,14 @@ export class Router {
     };
     private method: Method = 'get';
     private url?: string = '';
-    private data = {};
+    private data: any = {};
+    private config: {
+        common?: AxiosRequestConfig;
+        instance?: AxiosRequestConfig;
+    } = {
+        common: Configure.getInstance.getConfig(),
+        instance: undefined,
+    };
 
     public overrideUrl(url: string) {
         this.url = url.replace(/ /g, '');
@@ -26,8 +40,13 @@ export class Router {
         return this;
     }
 
+    public overrideConfig(config: AxiosRequestConfig) {
+        this.config.instance = config;
+        return this;
+    }
+
     public uri(uri: string): Router {
-        this.url = `${Configure.getInstance.getBaseUri()}${uri.replace(
+        this.url = `${Configure.getInstance.getBaseURL()}${uri.replace(
             / /g,
             '',
         )}`;
@@ -47,7 +66,13 @@ export class Router {
     private fetch(data?: any): AxiosPromise {
         return new Promise((resolve, reject) => {
             this.instance({
+                ...this.config.common,
+                ...this.config.instance,
                 headers: {
+                    ...(this.config?.common?.headers &&
+                        this.config?.common?.headers),
+                    ...(this.config?.instance?.headers &&
+                        this.config?.instance?.headers),
                     ...this.headers.common,
                     ...this.headers.instance,
                 },
@@ -118,5 +143,23 @@ export class Router {
         }
 
         return this.fetch(this.data);
+    }
+
+    public form(cb?: Callback): AxiosPromise {
+        const formData = new FormData();
+
+        if (!Array.isArray(this.data)) {
+            for (const prop in this.data) {
+                formData.append(prop, this.data[prop]);
+            }
+
+            this.data = formData;
+            this.overrideHeader({
+                ...this.headers.instance,
+                ...formData.getHeaders(),
+            });
+        }
+
+        return this.post(cb);
     }
 }

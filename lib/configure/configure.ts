@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from 'axios';
 import { UriStore, KeyStore } from '../stores';
 
 export class Configure {
@@ -26,12 +27,24 @@ export class Configure {
         return KeyStore.getInstance.getData('header');
     }
 
-    public baseUri(uri: string): Configure {
-        UriStore.getInstance.setData(uri.replace(/ /g, ''));
+    public baseURL(url: string): Configure {
+        UriStore.getInstance.setData(url.replace(/ /g, ''));
         return this;
     }
 
-    public getBaseUri(): string {
+    public getBaseURL(): string {
         return UriStore.getInstance.getData();
+    }
+
+    public config(config: AxiosRequestConfig): Configure {
+        KeyStore.getInstance.setData(
+            'config',
+            config as Record<string, unknown>,
+        );
+        return this;
+    }
+
+    public getConfig(): AxiosRequestConfig {
+        return KeyStore.getInstance.getData('config');
     }
 }
