@@ -125,12 +125,10 @@ describe('Router', () => {
             try {
                 const result = await router
                     .overrideHeader({
-                        'auth-token': 'ae0a1ab8-5565-4e27-a341-47bbcc1fa3b3',
+                        'auth-token': '',
                         ...formData.getHeaders(),
                     })
-                    .overrideUrl(
-                        'https://dev.themovill.com/api/m_files/v1/in/files/change',
-                    )
+                    .overrideUrl('')
                     .overrideConfig({
                         timeout: 10000000,
                         maxContentLength: 50000000,
@@ -153,16 +151,10 @@ describe('Router', () => {
 
             try {
                 const result = await router
-                    .overrideUrl(
-                        'https://dev.themovill.com/api/m_files/v1/in/files/change',
-                    )
-                    // .overrideHeader({
-                    //     'auth-token': 'ae0a1ab8-5565-4e27-a341-47bbcc1fa3b3',
-                    // })
+                    .overrideUrl('')
                     .overrideConfig({
                         headers: {
-                            'auth-token':
-                                'ae0a1ab8-5565-4e27-a341-47bbcc1fa3b3',
+                            'auth-token': '',
                         },
                         timeout: 10000000,
                         maxContentLength: 50000000,
