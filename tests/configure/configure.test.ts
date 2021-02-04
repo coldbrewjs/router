@@ -9,17 +9,24 @@ describe('Configure', () => {
     };
 
     it('should save proper uri', () => {
-        Configure.getInstance.baseUri(baseUri);
-        expect(Configure.getInstance.getBaseUri()).toEqual(baseUri);
+        Configure.getInstance.baseURL(baseUri);
+        expect(Configure.getInstance.getBaseURL()).toEqual(baseUri);
     });
 
     it('should save uri without padding', () => {
-        Configure.getInstance.baseUri(baseUriWithPadding);
-        expect(Configure.getInstance.getBaseUri()).toEqual(baseUri);
+        Configure.getInstance.baseURL(baseUriWithPadding);
+        expect(Configure.getInstance.getBaseURL()).toEqual(baseUri);
     });
 
     it('should save header', () => {
         Configure.getInstance.header(header);
         expect(Configure.getInstance.getHeader()).toEqual(header);
+    });
+
+    it('should set config', () => {
+        Configure.getInstance.config({ maxContentLength: 100000 });
+        expect(Configure.getInstance.getConfig()).toEqual({
+            maxContentLength: 100000,
+        });
     });
 });

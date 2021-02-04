@@ -47,18 +47,22 @@ Setting up a routing environment using `Configure`
 ```typescript
 import { Configure } from '@coldbrewjs/router';
 
-Configure.getInstance.baseUri('http://api-test.com/v1');
+Configure.getInstance.baseURL('http://api-test.com/v1');
 Configure.getInstance.header({
   accessToken: '1234',
   transactionId: '5678'
 });
+Configure.getInstance.config({
+  timeout: 100000,
+  maxContentLength: 100000
+})
 
 ```
 
 Performing a `GET` request
 
 ```typescript
-import { Router } from '@coldbrewjs/router';
+import { Router, RouterResponse, RouterError } from '@coldbrewjs/router';
 
 const router = new Router();
 /** 
@@ -102,7 +106,7 @@ async function getUser() {
 Performing a `POST` request
 
 ```typescript
-import { Router } from '@coldbrewjs/router';
+import { Router, RouterResponse, RouterError } from '@coldbrewjs/router';
 
 const router = new Router();
 
@@ -158,7 +162,7 @@ Override routing environment dynamically
 ```typescript
 import { Configure, Router } from '@coldbrewjs/router';
 
-Configure.getInstance.baseUri('https://dev.api.com/v1');
+Configure.getInstance.baseURL('https://dev.api.com/v1');
 Configure.getInstance.header({
   accessToken: '1234',
   transactionId: '5678'
@@ -218,6 +222,111 @@ Promise.all([firstRouter, secondRouter, thirdRouter]).then(
         console.log(response[2]);
     },
 );
+```
+
+Performing a `GET` request
+
+```typescript
+import { Router, RouterResponse, RouterError } from '@coldbrewjs/router';
+
+const router = new Router();
+/** 
+ *  already have string value 'http://http://api-test.com/v1' as prefix uri
+ *  it always routes with header { accessToken: '1234', transactionId: '5678' }
+ */
+
+// Make a request with callback pattern
+router.uri('/user?id=12345')
+  .get((err: RouterError, response: RouterResponse) => {
+        if (err) {
+          console.log('err:', err);
+        }
+
+        console.log(response);
+  });
+
+// Make a request with promise pattern
+router.uri('/user?id=12345')
+  .get()
+  .then((response: RouterResponse) => {
+          console.log(response);
+  })
+  .catch((err: RouterError) => {
+          console.log(err);
+  });
+
+// Make a request with async/await pattern
+async function getUser() {
+  try {
+    const results: RouterResponse = await router.uri('/user?id=12345').get();
+  } catch (err) {
+    console.log(err);
+  }
+}
+```
+
+> **NOTE:** `async/await` is part of ECMAScript 2017 and is not supported in Internet
+> Explorer and older browsers.
+
+Performing a `Form data` request
+
+```typescript
+import { Configure, Router, RouterResponse, RouterError } from '@coldbrewjs/router';
+import FormData from 'form-data';
+
+Configure.getInstance.baseURL('https://dev.api.com/upload');
+Configure.getInstance.config({
+  timeout: 100000,
+  maxContentLength: 100000
+})
+
+const router = new Router();
+
+// Make a request with Form data 
+const file = fs.createReadStream(path.resolve('./sample.pdf'));
+
+const formData = new FormData();
+formData.append('file', file);
+
+const router = new Router();
+
+try {
+    const result = await router
+        .overrideHeader({
+            'accessToken': 'ae0a1ab8-1111-4e27-1231-47bbcc1fa3b3',
+            ...formData.getHeaders(),
+        })
+        .overrideUrl(
+            'https://dev.api.com/upload/v2',
+        )
+        .payload(formData)
+        .post();
+
+    console.log(result.data);
+} catch (err) {
+    console.log(err);
+}
+
+// Make a request with embed form method
+try {
+    const result = await router
+        .uri('/v1')
+        .overrideConfig({
+            headers: {
+                'custom-token': 'ae0a1ab8-5565-4e27-a341',
+            },
+            timeout: 1500000,
+            maxContentLength: 19500000,
+        })
+        .payload({
+            file: file,
+        })
+        .form();
+
+    console.log(result.data);
+} catch (err) {
+    console.log(err);
+}
 ```
 
 ## License

@@ -1,5 +1,8 @@
 import { RouterError, RouterResponse } from '../../lib/types';
 import { Router } from '../../lib/router';
+import * as fs from 'fs';
+import path from 'path';
+import FormData from 'form-data';
 
 describe('Router', () => {
     describe('get', () => {
@@ -105,6 +108,65 @@ describe('Router', () => {
                 expect(response.data).toBeTruthy();
             } catch (e) {
                 console.log(e.response.data);
+            }
+        });
+    });
+
+    describe('form', () => {
+        it('should post form data', async () => {
+            const file = fs.createReadStream(
+                path.resolve('./tests/router/sample.pdf'),
+            );
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const router = new Router();
+            try {
+                const result = await router
+                    .overrideHeader({
+                        'auth-token': '',
+                        ...formData.getHeaders(),
+                    })
+                    .overrideUrl('')
+                    .overrideConfig({
+                        timeout: 10000000,
+                        maxContentLength: 50000000,
+                    })
+                    .payload(formData)
+                    .post();
+
+                console.log(result.data);
+            } catch (err) {
+                console.log(err);
+            }
+        });
+
+        it('should send data using embed form method', async () => {
+            const file = fs.createReadStream(
+                path.resolve('./tests/router/sample.pdf'),
+            );
+
+            const router = new Router();
+
+            try {
+                const result = await router
+                    .overrideUrl('')
+                    .overrideConfig({
+                        headers: {
+                            'auth-token': '',
+                        },
+                        timeout: 10000000,
+                        maxContentLength: 50000000,
+                    })
+                    .payload({
+                        file: file,
+                    })
+                    .form();
+
+                console.log(result.data);
+            } catch (err) {
+                console.log(err);
             }
         });
     });
