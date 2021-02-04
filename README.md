@@ -224,50 +224,6 @@ Promise.all([firstRouter, secondRouter, thirdRouter]).then(
 );
 ```
 
-Performing a `GET` request
-
-```typescript
-import { Router, RouterResponse, RouterError } from '@coldbrewjs/router';
-
-const router = new Router();
-/** 
- *  already have string value 'http://http://api-test.com/v1' as prefix uri
- *  it always routes with header { accessToken: '1234', transactionId: '5678' }
- */
-
-// Make a request with callback pattern
-router.uri('/user?id=12345')
-  .get((err: RouterError, response: RouterResponse) => {
-        if (err) {
-          console.log('err:', err);
-        }
-
-        console.log(response);
-  });
-
-// Make a request with promise pattern
-router.uri('/user?id=12345')
-  .get()
-  .then((response: RouterResponse) => {
-          console.log(response);
-  })
-  .catch((err: RouterError) => {
-          console.log(err);
-  });
-
-// Make a request with async/await pattern
-async function getUser() {
-  try {
-    const results: RouterResponse = await router.uri('/user?id=12345').get();
-  } catch (err) {
-    console.log(err);
-  }
-}
-```
-
-> **NOTE:** `async/await` is part of ECMAScript 2017 and is not supported in Internet
-> Explorer and older browsers.
-
 Performing a `Form data` request
 
 ```typescript
