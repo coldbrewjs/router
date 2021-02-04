@@ -267,13 +267,6 @@ try {
 try {
     const result = await router
         .uri('/v1')
-        .overrideConfig({
-            headers: {
-                'custom-token': 'ae0a1ab8-5565-4e27-a341',
-            },
-            timeout: 1500000,
-            maxContentLength: 19500000,
-        })
         .payload({
             file: file,
         })
