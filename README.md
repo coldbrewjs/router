@@ -238,6 +238,20 @@ Configure.getInstance.config({
 
 const router = new Router();
 
+// Make a request with embed form method
+try {
+    const result = await router
+        .uri('/v1')
+        .payload({
+            file: file,
+        })
+        .form();
+
+    console.log(result.data);
+} catch (err) {
+    console.log(err);
+}
+
 // Make a request with Form data 
 const file = fs.createReadStream(path.resolve('./sample.pdf'));
 
@@ -249,7 +263,7 @@ const router = new Router();
 try {
     const result = await router
         .overrideHeader({
-            'accessToken': 'ae0a1ab8-1111-4e27-1231-47bbcc1fa3b3',
+            'customToken': 'ae0a1ab8-1111-4e27-1231-47bbcc1fa3b3',
             ...formData.getHeaders(),
         })
         .overrideUrl(
@@ -257,20 +271,6 @@ try {
         )
         .payload(formData)
         .post();
-
-    console.log(result.data);
-} catch (err) {
-    console.log(err);
-}
-
-// Make a request with embed form method
-try {
-    const result = await router
-        .uri('/v1')
-        .payload({
-            file: file,
-        })
-        .form();
 
     console.log(result.data);
 } catch (err) {
