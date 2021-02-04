@@ -237,6 +237,7 @@ Configure.getInstance.config({
 })
 
 const router = new Router();
+const file = fs.createReadStream(path.resolve('./sample.pdf'));
 
 // Make a request with embed form method
 try {
@@ -253,8 +254,6 @@ try {
 }
 
 // Make a request with Form data 
-const file = fs.createReadStream(path.resolve('./sample.pdf'));
-
 const formData = new FormData();
 formData.append('file', file);
 
