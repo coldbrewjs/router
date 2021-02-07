@@ -205,7 +205,7 @@ import { Router, Configure } from '@coldbrewjs/router';
 
 const baseUri = 'http://api.service.com';
 
-Configure.getInstance.baseUri(baseUri);
+Configure.getInstance.baseURL(baseUri);
 
 const products = '/products';
 const categories = '/categories';
