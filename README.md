@@ -239,15 +239,14 @@ Configure.getInstance.config({
 })
 
 const router = new Router();
-const file = fs.createReadStream(path.resolve('./sample.pdf'));
+const formData = new FormData();
+formData.append('file', JSON.stringify(temp));
 
-// Make a request with embed form method
+// Make a request with FormData from Browser
 try {
     const result = await router
         .uri('/v1')
-        .payload({
-            file: file,
-        })
+        .payload(formData)
         .form();
 
     console.log(result.data);
@@ -255,23 +254,21 @@ try {
     console.log(err);
 }
 
-// Make a request with Form data 
-const formData = new FormData();
+// Make a request FormData from Node.js  
+const file = fs.createReadStream(path.resolve('./sample.pdf'));
+const formData_2 = new FormData();
 formData.append('file', file);
 
-const router = new Router();
+const router_2 = new Router();
 
 try {
-    const result = await router
+    const result_2 = await router
         .overrideHeader({
-            'customToken': 'ae0a1ab8-1111-4e27-1231-47bbcc1fa3b3',
             ...formData.getHeaders(),
         })
-        .overrideUrl(
-            'https://dev.api.com/upload/v2',
-        )
+        .uri('/v2')
         .payload(formData)
-        .post();
+        .form();
 
     console.log(result.data);
 } catch (err) {
