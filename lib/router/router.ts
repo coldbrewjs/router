@@ -5,7 +5,6 @@ import axios, {
     AxiosResponse,
     Method,
 } from 'axios';
-import FormData from 'form-data';
 import { Configure } from '../configure';
 
 type Callback = (
@@ -146,19 +145,10 @@ export class Router {
     }
 
     public form(cb?: Callback): AxiosPromise {
-        const formData = new FormData();
-
-        if (!Array.isArray(this.data)) {
-            for (const prop in this.data) {
-                formData.append(prop, this.data[prop]);
-            }
-
-            this.data = formData;
-            this.overrideHeader({
-                ...this.headers.instance,
-                ...formData.getHeaders(),
-            });
-        }
+        this.overrideHeader({
+            ...this.headers.instance,
+            'Content-Type': 'multipart/form-data',
+        });
 
         return this.post(cb);
     }

@@ -126,9 +126,10 @@ describe('Router', () => {
                 const result = await router
                     .overrideHeader({
                         'auth-token': '',
+                        'Content-Type': 'multipart/form-data',
                         ...formData.getHeaders(),
                     })
-                    .overrideUrl('')
+                    .uri('/api/m_files/v1/in/files/change')
                     .overrideConfig({
                         timeout: 10000000,
                         maxContentLength: 50000000,
@@ -142,7 +143,7 @@ describe('Router', () => {
             }
         });
 
-        it('should send data using embed form method', async () => {
+        it('should send data using form-data module', async () => {
             const file = fs.createReadStream(
                 path.resolve('./tests/router/sample.pdf'),
             );
